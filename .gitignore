@@ -144,7 +144,7 @@ rabbitmq-data/
 # ActiveMQ
 activemq-data/
 
-# SageMath parsed files
+# SageMath parsed filesgh repo clone ldsampaio/codemaster-semana3
 *.sage.py
 
 # Environments
@@ -181,7 +181,7 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# PyCharm
+# PyCharmgh repo clone ldsampaio/codemaster-semana3
 #   JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #   be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
 #   and can be added to the global gitignore or merged into this file.  For a more nuclear
@@ -216,3 +216,4 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+*.zip
