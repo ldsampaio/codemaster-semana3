@@ -4,7 +4,7 @@ from decimal import Decimal
 import logging
 import os
 
-# Testando comentário novo 2
+# Incluindo novo comentário
 
 TABLE_NAME = os.environ.get('TABLE_NAME', 'usuarios')
 
