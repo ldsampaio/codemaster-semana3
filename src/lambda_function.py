@@ -4,7 +4,7 @@ from decimal import Decimal
 import logging
 import os
 
-# Incluindo um comentário para testar o workflow do Github Actions
+# Testando comentário novo
 
 TABLE_NAME = os.environ.get('TABLE_NAME', 'usuarios')
 
