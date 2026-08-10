@@ -1,0 +1,55 @@
+name: Deploy Lambda to AWS
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout do código
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup Python
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Instalar dependências e empacotar
+      - name: Install dependencies and package
+        run: |
+          pip install -r requirements.txt -t package/
+          cp -r src/* package/
+          cd package
+          zip -r ../function.zip .
+          cd ..
+          ls -la function.zip
+
+      # Configurar AWS CLI
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Deploy para Lambda
+      - name: Update Lambda function code
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
+            --zip-file fileb://function.zip \
+            --publish
+
+      # Verificar deploy
+      - name: Verify deployment
+        run: |
+          aws lambda get-function \
+            --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
+            --query 'Configuration.LastUpdateStatus'
