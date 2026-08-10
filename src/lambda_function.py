@@ -4,6 +4,8 @@ from decimal import Decimal
 import logging
 import os
 
+# Incluindo um comentário para testar o workflow do Github Actions
+
 TABLE_NAME = os.environ.get('TABLE_NAME', 'usuarios')
 
 logger = logging.getLogger()
